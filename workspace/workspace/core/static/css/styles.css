@@ -1,0 +1,86 @@
+/*------------------------------
+	2.6 Table
+------------------------------*/
+table {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #e9e9e9;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > tbody > tr > td,
+table > tfoot > tr > td {
+  border: 2px solid #000;
+  line-height: 1.42857;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+table > thead > tr > th, table > thead > tr > td {
+  border-bottom-width: 2px;
+}
+
+table th {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+table.gmud Table {
+  border: 4px solid #555555;
+  background-color: #555555;
+  width: 400px;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.gmud Table td, table.gmudTable th {
+  border: 1px solid #555555;
+  padding: 5px 10px;
+}
+table.gmud Table tbody td {
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+table.gmud Table td:nth-child(even) {
+  background: #398AA4;
+}
+table.gmud Table thead {
+  background: #398AA4;
+  border-bottom: 10px solid #398AA4;
+}
+table.gmud Table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  border-left: 2px solid #398AA4;
+}
+table.gmud Table thead th:first-child {
+  border-left: none;
+}
+
+table.gmud Table tfoot {
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #398AA4;
+}
+table.gmud Table tfoot td {
+  font-size: 13px;
+}
+table.gmud Table tfoot .links {
+  text-align: right;
+}
+table.gmud Table tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #398AA4;
+  padding: 2px 8px;
+  border-radius: 5px;
+}

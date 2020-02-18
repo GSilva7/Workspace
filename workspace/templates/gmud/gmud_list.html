@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main-panel">
+<tbody>
+<table class="gmudTable" id="gmudTable">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)"><strong><span>Id</span></strong></th>
+        <th onclick="sortTable(1)"><strong><span>Titulo</span></strong></th>
+        <th onclick="sortTable(2)"><strong><span>Cliente</span></strong></th>
+        <th onclick="sortTable(3)"><strong><span>Criticidade</span></strong></th>
+        <th onclick="sortTable(4)"><strong><span>Data de Execução</span></strong></th>
+        <th onclick="sortTable(5)"><strong><span>Data de Criação</span></strong></th>
+        <th onclick="sortTable(6)"><strong><span>Status</span></strong></th>
+        <th onclick="sortTable(7)"><strong><span>Ações</span></strong></th>
+    </tr>
+    </thead>
+    {% for gmud in object_list %}
+    {% if gmud.status == 1 %}
+    <tr style="background-color: red">
+    {% elif gmud.status == 3 %}
+    <tr style="background-color: mediumseagreen">
+    {% else %}
+    <tr>
+    {% endif %}
+        <td><strong><span>{{gmud.id}}</span></strong></td>
+        <td> {{ gmud.titulo }}</td>
+        <td> {{ gmud.get_cliente_display }}</td>
+        <td> {{ gmud.get_criticidade_display }}</td>
+        <td> {{ gmud.data }} às {{ gmud.hora }}</td>
+        <td> {{ gmud.datacriacao }}</td>
+        <td> {{ gmud.get_status_display }}</td>
+        <td><button onclick="window.location.href = '{% url 'gmud_view' gmud.id %}'">View</button>
+        <button onclick="window.location.href = '{% url 'gmud_update' gmud.id %}'">Edit</button>
+        <button onclick="window.location.href = '{% url 'gmud_delete' gmud.id %}'">Delete</button></td>
+    </tr>
+    {% endfor %}
+</table>
+</tbody>
+</div>
+<style>
+    table.gmud Table {
+  border: 4px solid #555555;
+  background-color: #555555;
+  width: 400px;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.gmud Table td, table.gmudTable th {
+  border: 1px solid #555555;
+  padding: 5px 10px;
+}
+table.gmud Table tbody td {
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+table.gmud Table td:nth-child(even) {
+  background: #398AA4;
+}
+table.gmud Table thead {
+  background: #398AA4;
+  border-bottom: 10px solid #398AA4;
+}
+table.gmud Table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  border-left: 2px solid #398AA4;
+}
+table.gmud Table thead th:first-child {
+  border-left: none;
+}
+
+table.gmud Table tfoot {
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #398AA4;
+}
+table.gmud Table tfoot td {
+  font-size: 13px;
+}
+table.gmud Table tfoot .links {
+  text-align: right;
+}
+table.gmud Table tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #398AA4;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+</style>
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("gmudTable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+{% endblock %}

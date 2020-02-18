@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>GMUD Details</h1> <br>
+<h2>Titulo: {{object.titulo}}</h2> <br>
+Cliente: {{object.get_cliente_display}} <br>
+Resumo: {{ object.resumo }} <br>
+Servidores: {{object.servidores}} <br>
+Procedimento: <a href="{{object.procedimento.url}}" download> {{object.procedimento}} </a><br>
+Data de Execucao: {{object.data}} <br>
+Status: {{object.get_status_display}}
+
+<button onclick="window.location.href = '{% url 'gmud_update' object.id %}'">Edit</button>
+<button onclick="goBack()">Voltar</button>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>GMUD Delete</h1>
+<form method="post">{% csrf_token %}
+    Você está deletando a GMUD "{{ object.titulo }}", certo?
+    <input type="submit" value="Deletar" />
+    <button onclick="goBack()">Voltar</button>
+</form>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+<tbody>
+<table border="1">
+    {% for gmud in object_list %}
+    <tr>
+        <td> {{ gmud.titulo }}</td>
+        <td> {{ gmud.cliente }}</td>
+        <td> {{ gmud.criticidade }}</td>
+        <td> {{ gmud.resumo }}</td>
+        <td> {{ gmud.data }}</td>
+        <td> {{ gmud.datacriacao }}</td>
+        <td> {{ gmud.procedimento }}</td>
+        <td> {{ gmud.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</tbody>
