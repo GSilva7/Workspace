@@ -2,13 +2,12 @@
 {% block content %}
 <div class="main-panel">
 <tbody>
-<table class="gmudTable" id="gmudTable">
+<table class="table" id="gmudTable">
     <thead>
     <tr>
         <th onclick="sortTable(0)"><strong><span>Id</span></strong></th>
         <th onclick="sortTable(1)"><strong><span>Titulo</span></strong></th>
         <th onclick="sortTable(2)"><strong><span>Cliente</span></strong></th>
-        <th onclick="sortTable(3)"><strong><span>Criticidade</span></strong></th>
         <th onclick="sortTable(4)"><strong><span>Data de Execução</span></strong></th>
         <th onclick="sortTable(5)"><strong><span>Data de Criação</span></strong></th>
         <th onclick="sortTable(6)"><strong><span>Status</span></strong></th>
@@ -16,83 +15,36 @@
     </tr>
     </thead>
     {% for gmud in object_list %}
-    {% if gmud.status == 1 %}
-    <tr style="background-color: red">
-    {% elif gmud.status == 3 %}
-    <tr style="background-color: mediumseagreen">
-    {% else %}
     <tr>
-    {% endif %}
         <td><strong><span>{{gmud.id}}</span></strong></td>
-        <td> {{ gmud.titulo }}</td>
+        <td style="white-space: pre-wrap;"> {{ gmud.titulo }}</td>
         <td> {{ gmud.get_cliente_display }}</td>
-        <td> {{ gmud.get_criticidade_display }}</td>
-        <td> {{ gmud.data }} às {{ gmud.hora }}</td>
-        <td> {{ gmud.datacriacao }}</td>
-        <td> {{ gmud.get_status_display }}</td>
-        <td><button onclick="window.location.href = '{% url 'gmud_view' gmud.id %}'">View</button>
-        <button onclick="window.location.href = '{% url 'gmud_update' gmud.id %}'">Edit</button>
-        <button onclick="window.location.href = '{% url 'gmud_delete' gmud.id %}'">Delete</button></td>
+        <td> {{ gmud.data.day }}/{{ gmud.data.month }}/{{ gmud.data.year }} às {{ gmud.hora }}</td>
+        <td style="white-space: pre-wrap;"> {{ gmud.datacriacao.day }}/{{ gmud.datacriacao.month }}/{{ gmud.datacriacao.year }} às {{ gmud.datacriacao.time }}</td>
+        {% if gmud.status == 1 %}
+            <td> <label class="badge badge-warning"> {{ gmud.get_status_display }} </label></td>
+        {% elif gmud.status == 2 %}
+            <td> <label class="badge badge-primary"> {{ gmud.get_status_display }} </label></td>
+        {% elif gmud.status == 3 %}
+            <td> <label class="badge badge-success"> {{ gmud.get_status_display }} </label></td>
+        {% elif gmud.status == 4 %}
+            <td> <label class="badge badge-danger"> {{ gmud.get_status_display }} </label></td>
+        {% else %}
+            <td> <label class="badge badge-secondary"> {{ gmud.get_status_display }} </label></td>
+        {% endif %}
+        <td><button class="btn btn-outline-primary" onclick="window.location.href = '{% url 'gmud_view' gmud.id %}'">Info</button>
+        <button class="btn btn-outline-warning" onclick="window.location.href = '{% url 'gmud_update' gmud.id %}'">Atualizar</button>
+        {% if gmud.status >= 4 %}
+            <button class="btn btn-outline-success" disabled onclick="window.location.href = '{% url 'gmud_delete' gmud.id %}'">Finalizado</button></td>
+        {% else %}
+            <button class="btn btn-outline-secondary" onclick="window.location.href = '{% url 'gmud_delete' gmud.id %}'">Finalizar</button></td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>
 </tbody>
 </div>
-<style>
-    table.gmud Table {
-  border: 4px solid #555555;
-  background-color: #555555;
-  width: 400px;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.gmud Table td, table.gmudTable th {
-  border: 1px solid #555555;
-  padding: 5px 10px;
-}
-table.gmud Table tbody td {
-  font-size: 12px;
-  font-weight: bold;
-  color: #FFFFFF;
-}
-table.gmud Table td:nth-child(even) {
-  background: #398AA4;
-}
-table.gmud Table thead {
-  background: #398AA4;
-  border-bottom: 10px solid #398AA4;
-}
-table.gmud Table thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: left;
-  border-left: 2px solid #398AA4;
-}
-table.gmud Table thead th:first-child {
-  border-left: none;
-}
 
-table.gmud Table tfoot {
-  font-size: 13px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #398AA4;
-}
-table.gmud Table tfoot td {
-  font-size: 13px;
-}
-table.gmud Table tfoot .links {
-  text-align: right;
-}
-table.gmud Table tfoot .links a{
-  display: inline-block;
-  background: #FFFFFF;
-  color: #398AA4;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
-</style>
 
 <script>
 function sortTable(n) {

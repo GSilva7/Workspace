@@ -24,6 +24,7 @@ class gmud(models.Model):
         (3, 'Aprovado'),
         (4, 'Reprovado'),
         (5, 'Finalizado'),
+        (6, 'Rollback'),
     ]
     titulo = models.CharField('Titulo', max_length=100, null=False)
     cliente = models.IntegerField('Cliente', choices=Clientes)
@@ -35,6 +36,7 @@ class gmud(models.Model):
     procedimento = models.FileField('Procedimentos', upload_to='procedimentos/', null=False)
     servidores = models.CharField('Servidores', max_length=100, blank=True)
     status = models.IntegerField('Status', choices=Status, default=1)
+    resolucao = models.TextField('Resolucao', blank=True)
 
     def __str__(self):
         return self.titulo

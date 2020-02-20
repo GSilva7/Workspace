@@ -26,6 +26,10 @@ Status = [
         (4, 'Reprovado'),
         (5, 'Finalizado'),
     ]
+EndStatus = [
+    (5, 'Finalizado'),
+    (6, 'Rollback'),
+]
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -47,3 +51,10 @@ class GmudUpdateForm(forms.ModelForm):
         widgets = {
             'hora': TimeInput()
         }
+class GmudEndForm(forms.ModelForm):
+    class Meta:
+        model = gmud
+        fields = ['status', 'resolucao']
+        def __init__(self, *args, **kwargs):
+            super(GmudEndForm, self).__init__(*args, **kwargs)
+            self.fields[0].choices = EndStatus

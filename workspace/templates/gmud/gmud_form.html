@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="form-style-2">
-    <div class="form-style-2-heading">Formulário de abertura de GMUD</div>
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+<div class="card card-body">
+    <h4 class="card-title">Formulário de abertura de GMUD</h4>
+    <form class="forms-sample" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
-       <input type="submit" value="Submit" />
+       <input class="btn btn-outline-success" type="submit" value="Criar" />
     </form>
 </div>
 <style type="text/css">

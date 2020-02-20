@@ -6,5 +6,5 @@ urlpatterns = [
     path('create/', views.GmudCreate, name='gmud_create'),
     path('view/<int:pk>', views.GmudView, name='gmud_view'),
     path('update/<int:pk>', views.GmudUpdate, name='gmud_update'),
-    path('delete/<int:pk>', views.GmudDelete, name='gmud_delete'),
+    path('delete/<int:pk>', views.GmudEnd, name='gmud_delete'),
 ]

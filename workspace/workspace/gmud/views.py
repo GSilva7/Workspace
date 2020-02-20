@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from workspace.settings import MEDIA_ROOT
 from .models import gmud
-from .forms import GmudCreateForm, GmudUpdateForm
+from .forms import GmudCreateForm, GmudUpdateForm, GmudEndForm
 from django.forms import ModelForm
 # Create your views here.
 
@@ -33,12 +33,13 @@ def GmudUpdate(request, pk, template_name='gmud/gmud_form.html'):
         form.save()
         return redirect('gmud_list')
     return render(request, template_name, {'form':form})
-def GmudDelete(request, pk, template_name='gmud/gmud_delete.html'):
+def GmudEnd(request, pk, template_name='gmud/gmud_end.html'):
     Gmud = get_object_or_404(gmud, pk=pk)
-    if request.method == 'POST':
-        gmud.delete(Gmud)
+    form = GmudEndForm(request.POST or None, instance=Gmud)
+    if form.is_valid():
+        form.save()
         return redirect('gmud_list')
-    return render(request, template_name, {'object':Gmud})
+    return render(request, template_name, {'form':form})
 
 def save_file(file, path=''):
     ''' Little helper to save a file
