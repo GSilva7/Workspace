@@ -1,17 +1,16 @@
 from django import forms
 from .models import gmud
+from workspace.clientes.models import clientes
 from foundation_filefield_widget.widgets import FoundationFileInput
 
 
-Clientes = [
-        (1, 'Sage'),
-        (2, 'Cetelem'),
-        (3, 'Bradesco'),
-        (4, 'Heineken'),
-        (5, 'Guardian'),
-        (6, 'Adtalem'),
-        (7, 'Allergan'),
+Clientes = Clientes = clientes.objects.all()
+count = 0
+for aux in Clientes:
+    cli = [
+        [count, aux.nome],
     ]
+    count = count + 1
 Criticidades = [
         (1, 'Nenhuma'),
         (2, 'Baixa'),

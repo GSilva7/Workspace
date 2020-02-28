@@ -1,16 +1,15 @@
 from django.db import models
-
+from workspace.clientes.models import clientes
 
 class gmud(models.Model):
-    Clientes = [
-        (1, 'Sage'),
-        (2, 'Cetelem'),
-        (3, 'Bradesco'),
-        (4, 'Heineken'),
-        (5, 'Guardian'),
-        (6, 'Adtalem'),
-        (7, 'Allergan'),
-    ]
+    """"Clientes = clientes.objects.all()
+    count = 0
+
+    for aux in Clientes:
+        cli = [
+            count, aux.nome
+        ]
+        count = count + 1 """
     Criticidades = [
         (1, 'Nenhuma'),
         (2, 'Baixa'),
@@ -27,7 +26,7 @@ class gmud(models.Model):
         (6, 'Rollback'),
     ]
     titulo = models.CharField('Titulo', max_length=100, null=False)
-    cliente = models.IntegerField('Cliente', choices=Clientes)
+    cliente = models.IntegerField('Cliente', choices=cli)
     criticidade = models.IntegerField('Criticidade', choices=Criticidades)
     resumo = models.CharField('Resumo', max_length=400, blank=True)
     data = models.DateField('Data de Execução', null=False)

@@ -6,14 +6,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from .forms import RegisterForm, EditAccountForm
 from workspace.gmud.models import gmud
+from workspace.clientes.models import clientes
 
 @login_required(login_url='/login')
 def home(request):
     Gmud = gmud.objects.all()
+    Clientes = clientes.objects.all()
     data = {}
     today = datetime.now()
     data['gmud_objects'] = Gmud
     data['today'] = today
+    data['clientes_objects'] = Clientes
     return render(request, 'home.html', data)
 def sagebook(request):
     return render(request, 'sagebook.html')

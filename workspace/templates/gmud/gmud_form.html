@@ -4,7 +4,14 @@
 <div class="card card-body">
     <h4 class="card-title">Formulário de abertura de GMUD</h4>
     <form class="forms-sample" method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <label for="id_titulo" class="col-form-label">Titulo: </label>
+            {{ form.titulo }}
+        </div>
+        <div class="form-group">
+            <label for="id_cliente" class="col-form-label">Cliente: </label>
+            {{ form.cliente }}
+        </div>
        <input class="btn btn-outline-success" type="submit" value="Criar" />
     </form>
 </div>
