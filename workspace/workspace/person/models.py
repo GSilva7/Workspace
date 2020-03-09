@@ -10,6 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('E-mail', unique=True)
     name = models.CharField('Nome', max_length=100)
     image = models.ImageField('Imagem de Perfil', upload_to='media/person/img', default='media/person/img/noavatar.png')
+    #aniversario = models.DateField(blank=True, null=True)
     is_active = models.BooleanField('Esta Ativo?', blank=True, default=True)
     is_superuser = models.BooleanField('Admin', blank=True, default=False)
     is_staff = models.BooleanField('É da equipe?', blank=True, default=True)

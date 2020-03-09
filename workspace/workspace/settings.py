@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'workspace.person',
     'workspace.gmud',
     'workspace.clientes',
+    'workspace.postagens',
     'foundation_filefield_widget',
 ]
 

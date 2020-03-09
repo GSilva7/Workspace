@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="main-panel">
+        <tbody>
+            <table class="table" id="posttable">
+                {% for post in object_list %}
+                    <td>{{ post.titulo }}</td>
+                {% endfor %}
+            </table>
+        </tbody>
+    </div>
+{% endblock %}

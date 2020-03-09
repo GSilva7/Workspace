@@ -3,14 +3,6 @@ from .models import gmud
 from workspace.clientes.models import clientes
 from foundation_filefield_widget.widgets import FoundationFileInput
 
-
-Clientes = Clientes = clientes.objects.all()
-count = 0
-for aux in Clientes:
-    cli = [
-        [count, aux.nome],
-    ]
-    count = count + 1
 Criticidades = [
         (1, 'Nenhuma'),
         (2, 'Baixa'),
@@ -46,7 +38,7 @@ class GmudCreateForm(forms.ModelForm):
 class GmudUpdateForm(forms.ModelForm):
     class Meta:
         model = gmud
-        fields = ['titulo', 'cliente', 'criticidade', 'resumo', 'data', 'hora', 'procedimento', 'status', 'servidores']
+        fields = ['titulo', 'criticidade', 'resumo', 'data', 'hora', 'procedimento', 'status']
         widgets = {
             'hora': TimeInput()
         }

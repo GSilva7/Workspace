@@ -14,9 +14,14 @@ def home(request):
     Clientes = clientes.objects.all()
     data = {}
     today = datetime.now()
+    countgmud = 0
+    for aux in Gmud:
+        if aux.status < 4:
+            countgmud = countgmud + 1
     data['gmud_objects'] = Gmud
     data['today'] = today
     data['clientes_objects'] = Clientes
+    data['gmud_pendente'] = countgmud
     return render(request, 'home.html', data)
 def sagebook(request):
     return render(request, 'sagebook.html')
